@@ -1,4 +1,4 @@
-pythonqt (3.2-1) experimental; urgency=medium
+pythonqt (3.2-1~exp1) experimental; urgency=medium
 
   * New upstream release
   * Adopting package as part of Python team (DMPT)
