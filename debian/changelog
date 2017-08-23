@@ -1,0 +1,78 @@
+pythonqt (3.2-1) experimental; urgency=medium
+
+  * New upstream release
+  * Adopting package as part of Python team (DMPT)
+    - debian/control: Setting new maintainer and uploader
+    - debian/copyright: Update with new maintainer
+  * Update compat level to 10
+  * Update standards version to 4.1.0.0
+  * Update debian/copyright to copyright-format 1.0
+  * Remove ancient breaks/replace
+  * Build against qt5 instead of qt4 (Closes: #832610)
+  * Switch build system from cmake to qmake
+    - Remove unneeded patches
+    - Update debian/rules
+  * Add lintian-override fo package-name-doesnt-match-sonames
+  * Remove README.Debian (no longer applicable)
+  * Add examples to doc
+  * Add patch to escape strings, fixes FTBFS due to warnings
+
+ -- Jonathan Carter <jcc@debian.org>  Fri, 11 Aug 2017 21:58:06 -0400
+
+pythonqt (3.0-2) unstable; urgency=medium
+
+  * Orphan the package
+  * Add PythonQtUtils.h which is somehow missing in CMakeLists.txt
+    (Thanks for the hint to alex)
+    Closes: #826966
+  * cme fix dpkg-control
+  * hardening=+bindnow
+  * automatically use xz compression
+
+ -- Andreas Tille <tille@debian.org>  Mon, 04 Jul 2016 17:02:27 +0200
+
+pythonqt (3.0-1) unstable; urgency=medium
+
+  [ Andreas Tille ]
+  * New upstream version
+  * Add myself to uploaders
+  * cme fix dpkg-control
+  * Adapt package name to library version
+
+  [ Florian Will ]
+  * build wrapper for every supported Qt class
+    Closes: #755901
+  * install gui/PythonQtScriptingConsole.h
+    Closes: #755849
+
+ -- Andreas Tille <tille@debian.org>  Fri, 11 Dec 2015 11:56:51 +0100
+
+pythonqt (2.1.0~svn247-1) unstable; urgency=low
+
+  * new snapshot based on svn r247
+  * bump libpythonqt2.0 to libpythonqt2.1.0
+  * maintain only one dev package (change libpythonqt2-dev to libpythonqt-dev)
+  * bump Standards-Version: 3.9.4
+  * remove obsolete DM-Upload-Allowed field
+  * debian/copyright: removed obsolete fields in dep5 copyright
+  * debian/compat: bump to 9
+  * debian/control: fix dh syntax issue
+
+ -- Dominique Belhachemi <domibel@debian.org>  Sun, 03 Nov 2013 20:30:26 -0500
+
+pythonqt (2.0.1-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix FTBFS with Qt 4.8 (Closes: #664569)
+    - Add debian/patches/stddecorators_no_keywords.patch
+    - Extend debian/patches/cmakebuildsystem.patch to compile with
+      -DQT_NO_KEYWORDS
+    - Thanks to Felix Geyer for the patch
+
+ -- Scott Kitterman <scott@kitterman.com>  Wed, 09 May 2012 00:14:21 -0400
+
+pythonqt (2.0.1-1) unstable; urgency=low
+
+  * Initial release (Closes: #616698)
+
+ -- Mathieu Malaterre <mathieu.malaterre@gmail.com>  Sat, 05 Mar 2011 16:34:12 +0100
