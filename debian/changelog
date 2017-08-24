@@ -1,7 +1,15 @@
+pythonqt (3.2-1~exp2) experimental; urgency=medium
+
+  * Package adopted by DPMT (Closes: #705207)
+  * New build-deps: libpulse-dev, libgtk2.0-dev
+  * Tidy up patch headers: fix-string-literals
+
+ -- Jonathan Carter <jcc@debian.org>  Wed, 23 Aug 2017 11:30:26 +0200
+
 pythonqt (3.2-1~exp1) experimental; urgency=medium
 
   * New upstream release
-  * Adopting package as part of Python team (DMPT)
+  * Adopting package as part of Python team (DPMT)
     - debian/control: Setting new maintainer and uploader
     - debian/copyright: Update with new maintainer
   * Update compat level to 10

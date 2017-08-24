@@ -1,2 +1,2 @@
-src/*.h usr/include/PythonQt
 lib/libPythonQt*.so usr/lib/
+src/*.h usr/include/PythonQt
