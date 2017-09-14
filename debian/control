@@ -23,7 +23,7 @@ Build-Depends: cmake,
                qtdeclarative5-dev,
                qtmultimedia5-dev,
                qttools5-dev
-Standards-Version: 4.1.0.0
+Standards-Version: 4.1.0
 Vcs-Git: https://anonscm.debian.org/git/python-modules/packages/pythonqt.git
 Vcs-Browser: https://anonscm.debian.org/git/python-modules/packages/pythonqt.git
 Homepage: http://pythonqt.sourceforge.net
@@ -35,7 +35,7 @@ Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: Dynamic Python binding for the Qt framework - runtime
  PythonQt offers an easy way to embed the Python scripting language into a
  C++ Qt applications. It makes heavy use of the QMetaObject system and thus
- requires Qt 4.x.
+ requires Qt 5.x.
  The focus of PythonQt is on embedding Python into an existing C++ application,
  not on writing the whole application completely in Python. If you want to write
  your whole application in Python, you should use PyQt or PySide instead.
@@ -54,7 +54,7 @@ Depends: libpythonqt3.2 (= ${binary:Version}),
 Description: Dynamic Python binding for the Qt framework - development
  PythonQt offers an easy way to embed the Python scripting language into a
  C++ Qt applications. It makes heavy use of the QMetaObject system and thus
- requires Qt 4.x.
+ requires Qt 5.x.
  The focus of PythonQt is on embedding Python into an existing C++ application,
  not on writing the whole application completely in Python. If you want to write
  your whole application in Python, you should use PyQt or PySide instead.

@@ -1,3 +1,15 @@
+pythonqt (3.2-3) unstable; urgency=medium
+
+  * debian/control: fix typo 's/libpythont/libpythonqt/g' (Closes: 875680)
+
+ -- Jonathan Carter <jcc@debian.org>  Thu, 14 Sep 2017 10:20:04 +0200
+
+pythonqt (3.2-2) unstable; urgency=medium
+
+  * Update description from "Qt 4.x" to "Qt 5.x" (Closes: #875108)
+
+ -- Jonathan Carter <jcc@debian.org>  Wed, 13 Sep 2017 09:49:28 +0200
+
 pythonqt (3.2-1) unstable; urgency=medium
 
   * Upload to unstable (no changes)
