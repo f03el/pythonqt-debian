@@ -1,3 +1,9 @@
+pythonqt (3.2-4~exp1) experimental; urgency=medium
+
+  * Fix FTBFS on arm and hppa architectures
+
+ -- Jonathan Carter <jcc@debian.org>  Mon, 18 Sep 2017 08:46:23 +0200
+
 pythonqt (3.2-3) unstable; urgency=medium
 
   * debian/control: fix typo 's/libpythont/libpythonqt/g' (Closes: 875680)
