@@ -1,0 +1,26 @@
+Description: Skip variadic functions
+ Some functions in the Qt API are variadic (i.e. accepting a variable number of
+ arguments), e.g. void critical(const char *msg, ...) in QMessageLogger.
+ Compiling the generated wrapper code with GCC fails, because the log functions
+ of QMessageLogger expect a format and arguments, and giving them a char pointer
+ yields an error [-Werror=format-security].
+ .
+ Since the arguments aren't properly handled, this patch makes the generator
+ skip those functions.
+From: Erik Lundin <erik@lun.nu>
+Origin: https://sourceforge.net/p/pythonqt/discussion/631392/thread/005fca4a/#397c
+Applied-Upstream: 3.3, https://sourceforge.net/p/pythonqt/code/458/
+
+--- a/generator/abstractmetabuilder.cpp
++++ b/generator/abstractmetabuilder.cpp
+@@ -1463,6 +1463,10 @@ AbstractMetaFunction *AbstractMetaBuilder::traverseFunction(FunctionModelItem fu
+     if (function_item->isFriend())
+         return 0;
+ 
++    // Filter out variadic functions (having ... arguments) - they are not currently handled
++    if (function_item->isVariadics()) {
++        return 0;
++    }
+ 
+     QString cast_type;
+ 

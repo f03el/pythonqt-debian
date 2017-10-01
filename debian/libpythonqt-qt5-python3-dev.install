@@ -1,0 +1,4 @@
+#!/usr/bin/dh-exec
+
+build-py3.*/lib/libPythonQt-Qt5-Python3.*.so usr/lib/${DEB_HOST_MULTIARCH}/
+build-py3.*/lib/PythonQt-Qt5-Python3.pc usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig/

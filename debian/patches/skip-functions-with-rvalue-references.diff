@@ -1,0 +1,167 @@
+Description: Skip functions with rvalue references
+ The code generator doesn't handle rvalue references present at least since
+ Qt 5.7 and generates code where function arguments are passed by value instead
+ of by rvalue reference. Trying to compile that code gives errors like
+ "error: call of overloaded [...] is ambiguous".
+ .
+ Skipping functions with rvalue reference arguments in the code generator should
+ be fine according to upstream developer Florian, since they don't make sense
+ for Python wrappers anyway.
+From: Erik Lundin <erik@lun.nu>
+Origin: https://sourceforge.net/p/pythonqt/discussion/631392/thread/49cb56c2/#1ce7
+Applied-Upstream: 3.3, https://sourceforge.net/p/pythonqt/code/459/
+
+--- a/generator/parser/binder.cpp
++++ b/generator/parser/binder.cpp
+@@ -375,6 +375,13 @@ void Binder::visitFunctionDefinition(FunctionDefinitionAST *node)
+     }
+ 
+   decl_cc.run(declarator);
++  foreach (DeclaratorCompiler::Parameter p, decl_cc.parameters()) {
++    if (p.type.isRvalueReference()) {
++      std::cerr << "** Skipping function with rvalue reference parameter: "
++                << qPrintable(name_cc.name()) << std::endl;
++      return;
++    }
++  }
+ 
+   Q_ASSERT(! decl_cc.id().isEmpty());
+ 
+--- a/generator/parser/codemodel.cpp
++++ b/generator/parser/codemodel.cpp
+@@ -144,6 +144,7 @@ TypeInfo TypeInfo::combine (const TypeInfo &__lhs, const TypeInfo &__rhs)
+   __result.setConstant (__result.isConstant () || __rhs.isConstant ());
+   __result.setVolatile (__result.isVolatile () || __rhs.isVolatile ());
+   __result.setReference (__result.isReference () || __rhs.isReference ());
++  __result.setRvalueReference (__result.isRvalueReference () || __rhs.isRvalueReference ());
+   __result.setIndirections (__result.indirections () + __rhs.indirections ());
+   __result.setArrayElements (__result.arrayElements () + __rhs.arrayElements ());
+ 
+@@ -187,7 +188,9 @@ QString TypeInfo::toString() const
+   if (indirections())
+     tmp += QString(indirections(), QLatin1Char('*'));
+ 
+-  if (isReference())
++  if (isRvalueReference())
++    tmp += QLatin1String("&&");
++  else if (isReference())
+     tmp += QLatin1Char('&');
+ 
+   if (isFunctionPointer())
+--- a/generator/parser/codemodel.h
++++ b/generator/parser/codemodel.h
+@@ -131,12 +131,13 @@ public:
+     : flags(other.flags),
+       m_qualifiedName(other.m_qualifiedName),
+       m_arrayElements(other.m_arrayElements),
+-      m_arguments(other.m_arguments)
++      m_arguments(other.m_arguments),
++      m_rvalue_reference(other.m_rvalue_reference)
+   {
+   }
+ 
+   TypeInfo():
+-    flags (0) {}
++    flags (0), m_rvalue_reference(false) {}
+ 
+   QStringList qualifiedName() const { return m_qualifiedName; }
+   void setQualifiedName(const QStringList &qualified_name) { m_qualifiedName = qualified_name; }
+@@ -150,6 +151,9 @@ public:
+   bool isReference() const { return m_reference; }
+   void setReference(bool is) { m_reference = is; }
+ 
++  bool isRvalueReference() const { return m_rvalue_reference; }
++  void setRvalueReference(bool is) { m_rvalue_reference = is; }
++
+   int indirections() const { return m_indirections; }
+   void setIndirections(int indirections) { m_indirections = indirections; }
+ 
+@@ -192,6 +196,7 @@ private:
+   QStringList m_qualifiedName;
+   QStringList m_arrayElements;
+   QList<TypeInfo> m_arguments;
++  bool m_rvalue_reference;
+ };
+ 
+ class _CodeModelItem: public QSharedData
+--- a/generator/parser/compiler_utils.cpp
++++ b/generator/parser/compiler_utils.cpp
+@@ -60,6 +60,7 @@ TypeInfo CompilerUtils::typeDescription(TypeSpecifierAST *type_specifier, Declar
+   typeInfo.setConstant (type_cc.isConstant ());
+   typeInfo.setVolatile (type_cc.isVolatile ());
+   typeInfo.setReference (decl_cc.isReference ());
++  typeInfo.setRvalueReference (decl_cc.isRvalueReference ());
+   typeInfo.setIndirections (decl_cc.indirection ());
+   typeInfo.setArrayElements (decl_cc.arrayElements ());
+ 
+--- a/generator/parser/declarator_compiler.cpp
++++ b/generator/parser/declarator_compiler.cpp
+@@ -62,6 +62,7 @@ void DeclaratorCompiler::run(DeclaratorAST *node)
+   _M_array.clear();
+   _M_function = false;
+   _M_reference = false;
++  _M_rvalue_reference = false;
+   _M_variadics = false;
+   _M_indirection = 0;
+ 
+@@ -116,6 +117,10 @@ void DeclaratorCompiler::visitPtrOperator(PtrOperatorAST *node)
+ 
+   switch (op)
+     {
++      case Token_and:
++        _M_rvalue_reference = true;
++        _M_reference = false;
++        break;
+       case '&':
+         _M_reference = true;
+         break;
+--- a/generator/parser/declarator_compiler.h
++++ b/generator/parser/declarator_compiler.h
+@@ -75,6 +75,7 @@ public:
+   inline bool isFunction() const { return _M_function; }
+   inline bool isVariadics() const { return _M_variadics; }
+   inline bool isReference() const { return _M_reference; }
++  inline bool isRvalueReference() const { return _M_rvalue_reference; }
+   inline int indirection() const { return _M_indirection; }
+   inline QList<Parameter> parameters() const { return _M_parameters; }
+ 
+@@ -88,6 +89,7 @@ private:
+ 
+   bool _M_function;
+   bool _M_reference;
++  bool _M_rvalue_reference;
+   bool _M_variadics;
+   int _M_indirection;
+   QString _M_id;
+--- a/generator/parser/name_compiler.cpp
++++ b/generator/parser/name_compiler.cpp
+@@ -147,7 +147,9 @@ void NameCompiler::visitTemplateArgument(TemplateArgumentAST *node)
+ 
+       _M_name.last() += q.join("::");
+ 
+-      if (decl_cc.isReference())
++      if (decl_cc.isRvalueReference())
++        _M_name.last() += "&&";
++      else if (decl_cc.isReference())
+         _M_name.last() += "&";
+       if (decl_cc.indirection())
+         _M_name.last() += QString(decl_cc.indirection(), '*');
+--- a/generator/parser/parser.cpp
++++ b/generator/parser/parser.cpp
+@@ -1040,7 +1040,7 @@ bool Parser::parsePtrOperator(PtrOperatorAST *&node)
+ {
+   int tk = token_stream.lookAhead();
+ 
+-  if (tk != '&' && tk != '*'
++  if (tk != '&' && tk != Token_and && tk != '*'
+       && tk != Token_scope && tk != Token_identifier)
+     {
+       return false;
+@@ -1054,6 +1054,7 @@ bool Parser::parsePtrOperator(PtrOperatorAST *&node)
+     {
+     case '&':
+     case '*':
++    case Token_and:
+       ast->op = token_stream.cursor();
+       token_stream.nextToken();
+       break;

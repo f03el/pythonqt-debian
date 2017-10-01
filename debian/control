@@ -3,22 +3,15 @@ Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.
 Uploaders: Jonathan Carter <jcc@debian.org>
 Section: libs
 Priority: optional
-Build-Depends: cmake,
-               debhelper (>= 10),
-               libgtk2.0-dev,
-               libpulse-dev,
-               libpythonqt-dev,
-               libqt5designer5,
-               libqt5multimediawidgets5,
+Build-Depends: debhelper (>= 10),
+               dh-exec (>= 0.3),
                libqt5opengl5-dev,
                libqt5svg5-dev,
                libqt5xmlpatterns5-dev,
-               libqtwebkit-dev,
-               pyqt5-dev,
-               pyqt5-dev-tools,
                python-dev,
-               python3-pyside.qtuitools,
+               python3-dev,
                qt5-qmake,
+               qtbase5-dev,
                qtbase5-private-dev,
                qtdeclarative5-dev,
                qtmultimedia5-dev,
@@ -27,14 +20,17 @@ Standards-Version: 4.1.0
 Vcs-Git: https://anonscm.debian.org/git/python-modules/packages/pythonqt.git
 Vcs-Browser: https://anonscm.debian.org/git/python-modules/packages/pythonqt.git
 Homepage: http://pythonqt.sourceforge.net
-X-Python-Version: current
+X-Python-Version: >= 2.6
+X-Python3-Version: >= 3.3
 
-Package: libpythonqt3.2
+Package: libpythonqt-qt5-python2-3
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Multi-Arch: same
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
 Description: Dynamic Python binding for the Qt framework - runtime
  PythonQt offers an easy way to embed the Python scripting language into a
- C++ Qt applications. It makes heavy use of the QMetaObject system and thus
+ C++ Qt applications. It makes heavy use of the QMetaObject system and
  requires Qt 5.x.
  The focus of PythonQt is on embedding Python into an existing C++ application,
  not on writing the whole application completely in Python. If you want to write
@@ -43,17 +39,18 @@ Description: Dynamic Python binding for the Qt framework - runtime
  Application and to script parts of your application via Python, PythonQt is the
  way to go!
  .
- This package contains the libraries needed to run PythonQt applications.
+ This package contains the libraries needed to run PythonQt applications
+ for Python 2.
 
-Package: libpythonqt-dev
+Package: libpythonqt-qt5-common-dev
 Architecture: any
+Multi-Arch: same
 Section: libdevel
-Depends: libpythonqt3.2 (= ${binary:Version}),
-         ${misc:Depends},
-         ${shlibs:Depends}
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
 Description: Dynamic Python binding for the Qt framework - development
  PythonQt offers an easy way to embed the Python scripting language into a
- C++ Qt applications. It makes heavy use of the QMetaObject system and thus
+ C++ Qt applications. It makes heavy use of the QMetaObject system and
  requires Qt 5.x.
  The focus of PythonQt is on embedding Python into an existing C++ application,
  not on writing the whole application completely in Python. If you want to write
@@ -62,4 +59,179 @@ Description: Dynamic Python binding for the Qt framework - development
  Application and to script parts of your application via Python, PythonQt is the
  way to go!
  .
- This package contains development files needed to build PythonQt applications.
+ This package contains development files common for Python 2 and Python 3
+ needed to build PythonQt applications.
+
+Package: libpythonqt-qt5-python2-dev
+Architecture: any
+Multi-Arch: same
+Section: libdevel
+Depends: libpythonqt-qt5-python2-3 (= ${binary:Version}),
+         libpythonqt-qt5-common-dev (= ${binary:Version}),
+         pkg-config,
+         ${shlibs:Depends},
+         ${misc:Depends}
+Description: Dynamic Python binding for the Qt framework - development
+ PythonQt offers an easy way to embed the Python scripting language into a
+ C++ Qt applications. It makes heavy use of the QMetaObject system and
+ requires Qt 5.x.
+ The focus of PythonQt is on embedding Python into an existing C++ application,
+ not on writing the whole application completely in Python. If you want to write
+ your whole application in Python, you should use PyQt or PySide instead.
+ If you are looking for a simple way to embed Python objects into your C++/Qt
+ Application and to script parts of your application via Python, PythonQt is the
+ way to go!
+ .
+ This package contains development files needed to build PythonQt applications
+ for Python 2.
+
+Package: libpythonqt-qtall-qt5-python2-3
+Architecture: any
+Multi-Arch: same
+Depends: libpythonqt-qt5-python2-3 (= ${binary:Version}),
+         pkg-config,
+         ${shlibs:Depends},
+         ${misc:Depends}
+Description: Dynamic Python binding for the Qt framework - runtime
+ PythonQt offers an easy way to embed the Python scripting language into a
+ C++ Qt applications. It makes heavy use of the QMetaObject system and
+ requires Qt 5.x.
+ The focus of PythonQt is on embedding Python into an existing C++ application,
+ not on writing the whole application completely in Python. If you want to write
+ your whole application in Python, you should use PyQt or PySide instead.
+ If you are looking for a simple way to embed Python objects into your C++/Qt
+ Application and to script parts of your application via Python, PythonQt is the
+ way to go!
+ .
+ This package contains the extension PythonQt_QtAll, enabling usage of
+ Qt classes from the embedded Python 2 code.
+
+Package: libpythonqt-qtall-qt5-common-dev
+Architecture: any
+Multi-Arch: same
+Section: libdevel
+Depends: libpythonqt-qt5-common-dev (= ${binary:Version}),
+         ${shlibs:Depends},
+         ${misc:Depends}
+Description: Dynamic Python binding for the Qt framework - development
+ PythonQt offers an easy way to embed the Python scripting language into a
+ C++ Qt applications. It makes heavy use of the QMetaObject system and
+ requires Qt 5.x.
+ The focus of PythonQt is on embedding Python into an existing C++ application,
+ not on writing the whole application completely in Python. If you want to write
+ your whole application in Python, you should use PyQt or PySide instead.
+ If you are looking for a simple way to embed Python objects into your C++/Qt
+ Application and to script parts of your application via Python, PythonQt is the
+ way to go!
+ .
+ This package contains development files common for both Python 2 and Python 3
+ needed to build applications using and the PythonQt extension PythonQt_QtAll.
+
+Package: libpythonqt-qtall-qt5-python2-dev
+Architecture: any
+Multi-Arch: same
+Section: libdevel
+Depends: libpythonqt-qtall-qt5-python2-3 (= ${binary:Version}),
+         libpythonqt-qtall-qt5-common-dev (= ${binary:Version}),
+         libpythonqt-qt5-python2-dev (= ${binary:Version}),
+         ${shlibs:Depends},
+         ${misc:Depends}
+Description: Dynamic Python binding for the Qt framework - development
+ PythonQt offers an easy way to embed the Python scripting language into a
+ C++ Qt applications. It makes heavy use of the QMetaObject system and
+ requires Qt 5.x.
+ The focus of PythonQt is on embedding Python into an existing C++ application,
+ not on writing the whole application completely in Python. If you want to write
+ your whole application in Python, you should use PyQt or PySide instead.
+ If you are looking for a simple way to embed Python objects into your C++/Qt
+ Application and to script parts of your application via Python, PythonQt is the
+ way to go!
+ .
+ This package contains development files needed to build applications
+ using and the PythonQt extension PythonQt_QtAll for Python 2.
+
+Package: libpythonqt-qt5-python3-3
+Architecture: any
+Multi-Arch: same
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Description: Dynamic Python binding for the Qt framework - runtime
+ PythonQt offers an easy way to embed the Python scripting language into a
+ C++ Qt applications. It makes heavy use of the QMetaObject system and
+ requires Qt 5.x.
+ The focus of PythonQt is on embedding Python into an existing C++ application,
+ not on writing the whole application completely in Python. If you want to write
+ your whole application in Python, you should use PyQt or PySide instead.
+ If you are looking for a simple way to embed Python objects into your C++/Qt
+ Application and to script parts of your application via Python, PythonQt is the
+ way to go!
+ .
+ This package contains the libraries needed to run PythonQt applications
+ for Python 3.
+
+Package: libpythonqt-qt5-python3-dev
+Architecture: any
+Multi-Arch: same
+Section: libdevel
+Depends: libpythonqt-qt5-python3-3 (= ${binary:Version}),
+         libpythonqt-qt5-common-dev (= ${binary:Version}),
+         pkg-config,
+         ${shlibs:Depends},
+         ${misc:Depends}
+Description: Dynamic Python binding for the Qt framework - development
+ PythonQt offers an easy way to embed the Python scripting language into a
+ C++ Qt applications. It makes heavy use of the QMetaObject system and
+ requires Qt 5.x.
+ The focus of PythonQt is on embedding Python into an existing C++ application,
+ not on writing the whole application completely in Python. If you want to write
+ your whole application in Python, you should use PyQt or PySide instead.
+ If you are looking for a simple way to embed Python objects into your C++/Qt
+ Application and to script parts of your application via Python, PythonQt is the
+ way to go!
+ .
+ This package contains development files needed to build PythonQt applications
+ for Python 3.
+
+Package: libpythonqt-qtall-qt5-python3-3
+Architecture: any
+Multi-Arch: same
+Depends: libpythonqt-qt5-python3-3 (= ${binary:Version}),
+         ${shlibs:Depends},
+         ${misc:Depends}
+Description: Dynamic Python binding for the Qt framework - runtime
+ PythonQt offers an easy way to embed the Python scripting language into a
+ C++ Qt applications. It makes heavy use of the QMetaObject system and
+ requires Qt 5.x.
+ The focus of PythonQt is on embedding Python into an existing C++ application,
+ not on writing the whole application completely in Python. If you want to write
+ your whole application in Python, you should use PyQt or PySide instead.
+ If you are looking for a simple way to embed Python objects into your C++/Qt
+ Application and to script parts of your application via Python, PythonQt is the
+ way to go!
+ .
+ This package contains the extension PythonQt_QtAll, enabling usage of
+ Qt classes from the embedded Python 3 code.
+
+Package: libpythonqt-qtall-qt5-python3-dev
+Architecture: any
+Multi-Arch: same
+Section: libdevel
+Depends: libpythonqt-qtall-qt5-python3-3 (= ${binary:Version}),
+         libpythonqt-qtall-qt5-common-dev (= ${binary:Version}),
+         libpythonqt-qt5-python3-dev (= ${binary:Version}),
+         pkg-config,
+         ${shlibs:Depends},
+         ${misc:Depends}
+Description: Dynamic Python binding for the Qt framework - development
+ PythonQt offers an easy way to embed the Python scripting language into a
+ C++ Qt applications. It makes heavy use of the QMetaObject system and
+ requires Qt 5.x.
+ The focus of PythonQt is on embedding Python into an existing C++ application,
+ not on writing the whole application completely in Python. If you want to write
+ your whole application in Python, you should use PyQt or PySide instead.
+ If you are looking for a simple way to embed Python objects into your C++/Qt
+ Application and to script parts of your application via Python, PythonQt is the
+ way to go!
+ .
+ This package contains development files needed to build applications
+ using and the PythonQt extension PythonQt_QtAll for Python 3.
