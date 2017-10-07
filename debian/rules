@@ -3,13 +3,7 @@
 export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
 export QT_SELECT=qt5
 
-# Use less optimization on architectures that FTBFS otherwise
-# Thanks to John David Anglin (see: #839602) who originally
-# submitted this snippet for the hyperrogue package
-ifneq (,$(findstring $(DEB_HOST_ARCH),arm64))
-export DEB_CXXFLAGS_MAINT_APPEND=-O0
-endif
-# See also bug report #823265
+# Use -mlongcalls for hppa
 ifneq (,$(findstring $(DEB_HOST_ARCH),hppa))
 export DEB_CXXFLAGS_MAINT_APPEND=-mlong-calls
 endif

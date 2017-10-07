@@ -16,7 +16,7 @@ Build-Depends: debhelper (>= 10),
                qtdeclarative5-dev,
                qtmultimedia5-dev,
                qttools5-dev
-Standards-Version: 4.1.0
+Standards-Version: 4.1.1
 Vcs-Git: https://anonscm.debian.org/git/python-modules/packages/pythonqt.git
 Vcs-Browser: https://anonscm.debian.org/git/python-modules/packages/pythonqt.git
 Homepage: http://pythonqt.sourceforge.net
