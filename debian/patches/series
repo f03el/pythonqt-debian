@@ -2,3 +2,4 @@ enable-python-selection.diff
 skip-functions-with-rvalue-references.diff
 skip-variadic-functions.diff
 create-pkg-config.diff
+fix-string-literals
