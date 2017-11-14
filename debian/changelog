@@ -1,3 +1,9 @@
+pythonqt (3.2-4) unstable; urgency=medium
+
+  * Upload to unstable
+
+ -- Jonathan Carter <jcc@debian.org>  Mon, 13 Nov 2017 13:28:12 +0200
+
 pythonqt (3.2-4~exp2) experimental; urgency=medium
 
   [ Erik Lundin ]
