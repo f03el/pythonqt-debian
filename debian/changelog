@@ -1,3 +1,12 @@
+pythonqt (3.2-4~exp5) experimental; urgency=medium
+
+  * Add Erik Lunde's patch to fix builds on ppc64
+    (Closes: #881685)
+  * Add Erik Lunde's patch to fix files shipped in multiple binaries
+    (Closes: #881710)
+
+ -- Jonathan Carter <jcc@debian.org>  Mon, 20 Nov 2017 10:21:26 +0200
+
 pythonqt (3.2-4~exp4) experimental; urgency=medium
 
   * Fix generator Qt include dir for multiarch

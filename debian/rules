@@ -35,7 +35,8 @@ override_dh_auto_build:
 
 	for i in $(PY2VERS) $(PY3VERS); do \
 		export PYTHON_VERSION=$${i}; \
-		dh_auto_build --builddirectory=build-py$${i} -- sub-src sub-extensions; \
+		dh_auto_build --builddirectory=build-py$${i} -- sub-src; \
+		dh_auto_build --builddirectory=build-py$${i} -- sub-extensions; \
 	done
 
 override_dh_auto_clean:

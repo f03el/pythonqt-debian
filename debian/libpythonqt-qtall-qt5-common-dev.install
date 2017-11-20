@@ -1,1 +1,1 @@
-extensions/PythonQt_QtAll/*.h usr/include/PythonQt5/
+extensions/PythonQt_QtAll/PythonQt*.h usr/include/PythonQt5/

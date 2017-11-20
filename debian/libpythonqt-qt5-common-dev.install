@@ -1,2 +1,2 @@
-src/*.h usr/include/PythonQt5/
-src/gui/*.h usr/include/PythonQt5/gui/
+src/PythonQt*.h usr/include/PythonQt5/
+src/gui/PythonQt*.h usr/include/PythonQt5/gui/
