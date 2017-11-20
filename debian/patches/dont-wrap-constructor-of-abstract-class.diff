@@ -1,0 +1,21 @@
+Description: Don't wrap constructor of abstract class
+ Allow multiple inheritance since it doesn't seem to be a problem. Not doing it
+ prevents QMediaServiceProviderPlugin from inheriting from both QObject and
+ QMediaServiceProviderFactoryInterface, which hasn't been a problem before, but
+ in Qt 5.9, unnecessary 'virtual's in subclasses were replaced with 'override'
+ (unsupported by the generator), so that class got added even though it was
+ abstract, causing an error when the generator created a wrapper of the
+ constructor.
+From: Erik Lundin <erik@lun.nu>
+Forwarded: https://sourceforge.net/p/pythonqt/discussion/631393/thread/9cc0854d/#e285
+
+--- a/generator/abstractmetabuilder.cpp
++++ b/generator/abstractmetabuilder.cpp
+@@ -1372,7 +1372,6 @@ bool AbstractMetaBuilder::setupInheritan
+                                        .arg(meta_class->name())
+                                        .arg(base_classes.at(primary))
+                                        .arg(base_class_entry->name()));
+-                return false;
+             }
+             primaries++;
+             primary = i;

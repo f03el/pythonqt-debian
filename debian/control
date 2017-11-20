@@ -8,11 +8,9 @@ Build-Depends: debhelper (>= 10),
                libqt5opengl5-dev,
                libqt5svg5-dev,
                libqt5xmlpatterns5-dev,
-               libqtwebkit-dev,
-               pyqt5-dev,
-               pyqt5-dev-tools,
+               pkg-config,
                python-dev,
-               python3-pyside.qtuitools,
+               python3-dev,
                qt5-qmake,
                qtbase5-dev,
                qtbase5-private-dev,
@@ -23,7 +21,7 @@ Standards-Version: 4.1.1
 Vcs-Git: https://anonscm.debian.org/git/python-modules/packages/pythonqt.git
 Vcs-Browser: https://anonscm.debian.org/git/python-modules/packages/pythonqt.git
 Homepage: http://pythonqt.sourceforge.net
-X-Python-Version: >= 2.7
+X-Python-Version: >= 2.6
 X-Python3-Version: >= 3.3
 
 Package: libpythonqt-qt5-python2-3

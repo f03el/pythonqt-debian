@@ -1,0 +1,18 @@
+Description: Don't wrap template function
+ Add new template function to the list of functions to ignore.
+From: Erik Lundin <erik@lun.nu>
+Forwarded: https://sourceforge.net/p/pythonqt/discussion/631393/thread/9cc0854d/#e285
+
+--- a/generator/typesystem_qml.xml
++++ b/generator/typesystem_qml.xml
+@@ -5,7 +5,9 @@
+ <rejection class="QQmlTypeInfo"/>
+ <rejection class="QQmlImageProviderBase"/>
+ 
+-<object-type name="QJSEngine"></object-type>
++<object-type name="QJSEngine">
++  <modify-function signature="newQMetaObject()" remove="all"/>
++</object-type>
+ <object-type name="QJSValue"></object-type>
+ 
+ <enum-type name="QJSEngine::Extension"/>

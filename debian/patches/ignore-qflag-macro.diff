@@ -1,0 +1,19 @@
+Description: Ignore Q_FLAG macro
+ The Q_FLAGS macro is deprecated and in Qt 5.9 was replaced with Q_FLAG, which
+ wasn't on the list of unsupported macros. It caused the generator to fail when
+ parsing QPainter, so member variables of the inner class PixmapFragment were
+ for some reason added to the QPainter wrapper directly. This lead to several
+ members not being reconised when building.
+From: Erik Lundin <erik@lun.nu>
+Forwarded: https://sourceforge.net/p/pythonqt/discussion/631393/thread/9cc0854d/#e285
+
+--- a/generator/parser/rpp/pp-qt-configuration
++++ b/generator/parser/rpp/pp-qt-configuration
+@@ -9,6 +9,7 @@
+ #define Q_SLOTS slots
+ #define Q_SIGNALS signals
+ #define Q_FLAGS(a)
++#define Q_FLAG(a)
+ #define Q_PRIVATE_SLOT(a, b)
+ #define Q_DECLARE_INTERFACE(a,b)
+ #define Q_INTERFACES(a)

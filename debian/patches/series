@@ -2,4 +2,7 @@ enable-python-selection.diff
 skip-functions-with-rvalue-references.diff
 skip-variadic-functions.diff
 create-pkg-config.diff
-fix-string-literals
+ignore-qflag-macro.diff
+dont-wrap-constructor-of-abstract-class.diff
+dont-wrap-template-function.diff
+support-new-qt-quick-enums.diff

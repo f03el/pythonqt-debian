@@ -1,0 +1,17 @@
+Description: Add support for new enums in QSGGeometry
+From: Erik Lundin <erik@lun.nu>
+Forwarded: https://sourceforge.net/p/pythonqt/discussion/631393/thread/9cc0854d/#e285
+
+--- a/generator/typesystem_quick.xml
++++ b/generator/typesystem_quick.xml
+@@ -75,7 +75,10 @@
+ <enum-type name="QQuickWindow::SceneGraphError"></enum-type>
+ <enum-type name="QSGAbstractRenderer::ClearModeBit"></enum-type>
+ <enum-type name="QSGEngine::CreateTextureOption"></enum-type>
++<enum-type name="QSGGeometry::AttributeType"></enum-type>
+ <enum-type name="QSGGeometry::DataPattern"></enum-type>
++<enum-type name="QSGGeometry::DrawingMode"></enum-type>
++<enum-type name="QSGGeometry::Type"></enum-type>
+ <enum-type name="QSGMaterial::Flag"></enum-type>
+ <enum-type name="QSGNode::DirtyStateBit"></enum-type>
+ <enum-type name="QSGNode::DirtyState"></enum-type>
