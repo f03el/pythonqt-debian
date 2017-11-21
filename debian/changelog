@@ -1,3 +1,9 @@
+pythonqt (3.2-5) unstable; urgency=medium
+
+  * Upload to unstable
+
+ -- Jonathan Carter <jcc@debian.org>  Tue, 21 Nov 2017 17:56:29 +0200
+
 pythonqt (3.2-5~exp1) experimental; urgency=medium
 
   * Add Erik Lunde's patch to fix builds on ppc64
