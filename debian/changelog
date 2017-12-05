@@ -1,3 +1,11 @@
+pythonqt (3.2-6~exp1) experimental; urgency=medium
+
+  * Make common dev packages architecture: all
+  * Don't install compiled example code
+  * Move example files to dev package
+
+ -- Erik Lundin <erik@lun.nu>  Fri, 01 Dec 2017 14:19:42 +0100
+
 pythonqt (3.2-5) unstable; urgency=medium
 
   * Upload to unstable
@@ -6,9 +14,9 @@ pythonqt (3.2-5) unstable; urgency=medium
 
 pythonqt (3.2-5~exp1) experimental; urgency=medium
 
-  * Add Erik Lunde's patch to fix builds on ppc64
+  * Add Erik Lundin's patch to fix builds on ppc64
     (Closes: #881685)
-  * Add Erik Lunde's patch to fix files shipped in multiple binaries
+  * Add Erik Lundin's patch to fix files shipped in multiple binaries
     (Closes: #881710)
 
  -- Jonathan Carter <jcc@debian.org>  Mon, 20 Nov 2017 10:21:26 +0200

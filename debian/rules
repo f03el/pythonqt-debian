@@ -15,7 +15,7 @@ PY3VERS := $(shell py3versions -vd)
 	dh $@
 
 override_dh_auto_configure:
-	dh_auto_configure
+	dh_auto_configure --builddirectory=build-generator -- ../generator/generator.pro
 	for i in $(PY2VERS) $(PY3VERS); do \
 		export PYTHON_VERSION=$${i}; \
 		dh_auto_configure --builddirectory=build-py$${i} -- LIBS+=-L$$PWD/build-py$${i}/lib ../PythonQt.pro; \
@@ -23,7 +23,7 @@ override_dh_auto_configure:
 
 override_dh_auto_build:
 	# Build the generator
-	dh_auto_build -- sub-generator
+	dh_auto_build --builddirectory=build-generator
 
 	# Run the generator to create wrapper code for Qt classes. The generator
 	# will look for folders under QTDIR/include. To easily create this, symlink
@@ -31,7 +31,7 @@ override_dh_auto_build:
 	cd generator; \
 	mkdir -p qtdir; \
 	ln -s `pkg-config --variable=includedir Qt5Core` qtdir/include; \
-	QTDIR=qtdir ./pythonqt_generator qtscript_masterinclude.h build_all.txt
+	QTDIR=qtdir ../build-generator/pythonqt_generator qtscript_masterinclude.h build_all.txt
 
 	for i in $(PY2VERS) $(PY3VERS); do \
 		export PYTHON_VERSION=$${i}; \
