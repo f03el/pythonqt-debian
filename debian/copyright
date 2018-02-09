@@ -31,8 +31,9 @@ License: LGPL-2.1
  Nokia at qt-info@nokia.com.
 
 Files: debian/*
-Copyright: 2011; Mathieu Malaterre <mathieu.malaterre@gmail.com>
-Copyright: 2017 Jonathan Carter <jcc@debian.org>
+Copyright: 2018, Jonathan Carter <jcc@debian.org>
+           2017, Erik Lundin <erik@lun.nu>
+           2011, Mathieu Malaterre <mathieu.malaterre@gmail.com>
 License: LGPL-2.1
 
 License: LGPL-2.1
