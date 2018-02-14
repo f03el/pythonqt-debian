@@ -1,9 +1,10 @@
-pythonqt (3.2-7) UNRELEASED; urgency=medium
+pythonqt (3.2-7) unstable; urgency=medium
 
   * Move VCS to salsa.debian.org
   * Update standards version to 4.1.3
+  * Fix debian/copyright
 
- -- Jonathan Carter <jcc@debian.org>  Tue, 13 Feb 2018 09:27:50 +0200
+ -- Jonathan Carter <jcc@debian.org>  Wed, 14 Feb 2018 09:03:07 +0200
 
 pythonqt (3.2-6) unstable; urgency=medium
 
