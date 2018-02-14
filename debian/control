@@ -67,8 +67,8 @@ Package: libpythonqt-qt5-python2-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Depends: libpythonqt-qt5-python2-3 (= ${binary:Version}),
-         libpythonqt-qt5-common-dev (= ${binary:Version}),
+Depends: libpythonqt-qt5-python2-3 (= ${source:Version}),
+         libpythonqt-qt5-common-dev (= ${source:Version}),
          pkg-config,
          ${shlibs:Depends},
          ${misc:Depends}
@@ -89,7 +89,7 @@ Description: Dynamic Python binding for the Qt framework - development
 Package: libpythonqt-qtall-qt5-python2-3
 Architecture: any
 Multi-Arch: same
-Depends: libpythonqt-qt5-python2-3 (= ${binary:Version}),
+Depends: libpythonqt-qt5-python2-3 (= ${source:Version}),
          pkg-config,
          ${shlibs:Depends},
          ${misc:Depends}
@@ -111,7 +111,7 @@ Package: libpythonqt-qtall-qt5-common-dev
 Architecture: all
 Multi-Arch: foreign
 Section: libdevel
-Depends: libpythonqt-qt5-common-dev (= ${binary:Version}),
+Depends: libpythonqt-qt5-common-dev (= ${source:Version}),
          ${shlibs:Depends},
          ${misc:Depends}
 Description: Dynamic Python binding for the Qt framework - development
@@ -132,9 +132,9 @@ Package: libpythonqt-qtall-qt5-python2-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Depends: libpythonqt-qtall-qt5-python2-3 (= ${binary:Version}),
-         libpythonqt-qtall-qt5-common-dev (= ${binary:Version}),
-         libpythonqt-qt5-python2-dev (= ${binary:Version}),
+Depends: libpythonqt-qtall-qt5-python2-3 (= ${source:Version}),
+         libpythonqt-qtall-qt5-common-dev (= ${source:Version}),
+         libpythonqt-qt5-python2-dev (= ${source:Version}),
          ${shlibs:Depends},
          ${misc:Depends}
 Description: Dynamic Python binding for the Qt framework - development
@@ -174,8 +174,8 @@ Package: libpythonqt-qt5-python3-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Depends: libpythonqt-qt5-python3-3 (= ${binary:Version}),
-         libpythonqt-qt5-common-dev (= ${binary:Version}),
+Depends: libpythonqt-qt5-python3-3 (= ${source:Version}),
+         libpythonqt-qt5-common-dev (= ${source:Version}),
          pkg-config,
          ${shlibs:Depends},
          ${misc:Depends}
@@ -196,7 +196,7 @@ Description: Dynamic Python binding for the Qt framework - development
 Package: libpythonqt-qtall-qt5-python3-3
 Architecture: any
 Multi-Arch: same
-Depends: libpythonqt-qt5-python3-3 (= ${binary:Version}),
+Depends: libpythonqt-qt5-python3-3 (= ${source:Version}),
          ${shlibs:Depends},
          ${misc:Depends}
 Description: Dynamic Python binding for the Qt framework - runtime
@@ -217,9 +217,9 @@ Package: libpythonqt-qtall-qt5-python3-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Depends: libpythonqt-qtall-qt5-python3-3 (= ${binary:Version}),
-         libpythonqt-qtall-qt5-common-dev (= ${binary:Version}),
-         libpythonqt-qt5-python3-dev (= ${binary:Version}),
+Depends: libpythonqt-qtall-qt5-python3-3 (= ${source:Version}),
+         libpythonqt-qtall-qt5-common-dev (= ${source:Version}),
+         libpythonqt-qt5-python3-dev (= ${source:Version}),
          pkg-config,
          ${shlibs:Depends},
          ${misc:Depends}
